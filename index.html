@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comunica · Aprendizaje y ensayo de técnicas de comunicación</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,600;0,700;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="hero">
+    <nav class="nav">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span>Comunica</span>
+      </div>
+      <ul class="nav-links">
+        <li><a href="#modulos">Módulos</a></li>
+        <li><a href="#flashcards">Flashcards</a></li>
+        <li><a href="#ensayo">Ensayo</a></li>
+        <li><a href="#habitos">Hábitos</a></li>
+        <li><a href="#quiz">Quiz</a></li>
+        <li><a href="#diario">Diario</a></li>
+      </ul>
+    </nav>
+
+    <div class="hero-content">
+      <p class="eyebrow">Inspirado en el enfoque de Teresa Baró</p>
+      <h1>Aprende, ensaya y gana <em>presencia</em> al comunicar.</h1>
+      <p class="lead">
+        Un espacio para repasar los fundamentos, entrenar la voz, practicar la improvisación
+        y medir tu progreso día a día. La buena comunicación no se lee, se <strong>entrena</strong>.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#modulos">Empezar a aprender</a>
+        <a class="btn btn-ghost" href="#ensayo">Ir a la zona de ensayo</a>
+      </div>
+      <dl class="hero-stats">
+        <div><dt>Módulos</dt><dd>8</dd></div>
+        <div><dt>Ejercicios</dt><dd>20+</dd></div>
+        <div><dt>Minutos/día</dt><dd>10</dd></div>
+      </dl>
+    </div>
+  </header>
+
+  <main>
+    <!-- MÓDULOS DE APRENDIZAJE -->
+    <section id="modulos" class="section">
+      <div class="section-head">
+        <h2>Módulos de aprendizaje</h2>
+        <p>Abre cada tarjeta para ver los puntos clave y un mini-ejercicio aplicado.</p>
+      </div>
+      <div class="modules" id="modulesGrid"></div>
+    </section>
+
+    <!-- FLASHCARDS -->
+    <section id="flashcards" class="section section-alt">
+      <div class="section-head">
+        <h2>Flashcards</h2>
+        <p>Repasa conceptos clave: haz clic en la tarjeta para verla girar. Marca si la sabías o necesitas repasar — las pendientes volverán a salir.</p>
+      </div>
+      <div class="flash-controls">
+        <label class="flash-filter">
+          Categoría
+          <select id="flashCategory">
+            <option value="all">Todas</option>
+            <option value="no-verbal">No verbal</option>
+            <option value="voz">Voz y paraverbal</option>
+            <option value="verbal">Verbal</option>
+            <option value="escucha">Escucha y preguntas</option>
+            <option value="asertividad">Asertividad</option>
+            <option value="publico">Hablar en público</option>
+          </select>
+        </label>
+        <span id="flashProgress" class="muted">—</span>
+      </div>
+      <div class="flashcard" id="flashcard" tabindex="0" aria-label="Tarjeta de repaso, clic para girar">
+        <div class="flashcard-inner">
+          <div class="flashcard-face flashcard-front">
+            <span class="flash-tag" id="flashTag">—</span>
+            <p id="flashQuestion">Cargando…</p>
+            <small class="muted">Clic o barra espaciadora para girar</small>
+          </div>
+          <div class="flashcard-face flashcard-back">
+            <p id="flashAnswer">—</p>
+          </div>
+        </div>
+      </div>
+      <div class="flash-actions">
+        <button id="flashKnew" class="btn btn-primary">Me la sabía</button>
+        <button id="flashRepeat" class="btn btn-ghost">Repasar</button>
+        <button id="flashReset" class="btn btn-link">Reiniciar mazo</button>
+      </div>
+    </section>
+
+    <!-- ZONA DE ENSAYO -->
+    <section id="ensayo" class="section section-alt">
+      <div class="section-head">
+        <h2>Zona de ensayo</h2>
+        <p>Herramientas para practicar a diario. Nada se envía a servidores: todo ocurre en tu navegador.</p>
+      </div>
+
+      <div class="practice-grid">
+        <!-- Grabadora -->
+        <article class="card practice-card">
+          <h3>Grabadora de voz</h3>
+          <p class="muted">Ensaya un discurso, una presentación o una respuesta. Escúchate para detectar muletillas, tono y ritmo.</p>
+          <div class="recorder-controls">
+            <button id="recStart" class="btn btn-primary">Grabar</button>
+            <button id="recStop" class="btn btn-ghost" disabled>Detener</button>
+            <span id="recStatus" class="status">Inactivo</span>
+          </div>
+          <audio id="recPlayback" controls class="playback" hidden></audio>
+          <details class="help">
+            <summary>¿Qué escuchar?</summary>
+            <ul>
+              <li>Muletillas: "eh…", "o sea", "¿vale?"</li>
+              <li>Velocidad: ¿vas acelerado al final?</li>
+              <li>Pausas: ¿respiras o hablas sin aire?</li>
+              <li>Entonación: ¿varías o eres plano?</li>
+            </ul>
+          </details>
+        </article>
+
+        <!-- Cronómetro -->
+        <article class="card practice-card">
+          <h3>Cronómetro por hitos</h3>
+          <p class="muted">Divide tu intervención en apertura, desarrollo y cierre. Practica cumplir el tiempo.</p>
+          <div class="timer-display" id="timerDisplay">00:00</div>
+          <div class="timer-controls">
+            <button id="timerStart" class="btn btn-primary">Iniciar</button>
+            <button id="timerPause" class="btn btn-ghost">Pausa</button>
+            <button id="timerReset" class="btn btn-ghost">Reset</button>
+          </div>
+          <div class="timer-milestones">
+            <label>Objetivo total (seg): <input id="timerGoal" type="number" min="10" value="120" /></label>
+            <div class="milestones" id="milestones">
+              <span class="milestone" data-at="0.25">Gancho</span>
+              <span class="milestone" data-at="0.5">Cuerpo</span>
+              <span class="milestone" data-at="0.85">Cierre</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Generador de temas -->
+        <article class="card practice-card">
+          <h3>Improvisa en 60 segundos</h3>
+          <p class="muted">Un tema al azar. Estructura tu respuesta en: idea principal → ejemplo → conclusión.</p>
+          <div class="topic" id="topicBox">Pulsa "Nuevo tema" para empezar.</div>
+          <button id="topicBtn" class="btn btn-primary">Nuevo tema</button>
+        </article>
+
+        <!-- Trabalenguas -->
+        <article class="card practice-card">
+          <h3>Dicción: trabalenguas</h3>
+          <p class="muted">Léelo tres veces: despacio, a velocidad normal y rápido. Articula cada consonante.</p>
+          <blockquote id="tongueBox" class="quote">—</blockquote>
+          <button id="tongueBtn" class="btn btn-primary">Otro trabalenguas</button>
+        </article>
+
+        <!-- Respiración -->
+        <article class="card practice-card">
+          <h3>Respiración diafragmática</h3>
+          <p class="muted">Sigue la burbuja. Inhala 4s · retén 2s · exhala 6s. Tres ciclos antes de hablar.</p>
+          <div class="breathing">
+            <div class="bubble" id="bubble"></div>
+            <p class="bubble-label" id="bubbleLabel">Pulsa comenzar</p>
+          </div>
+          <button id="breathBtn" class="btn btn-primary">Comenzar</button>
+        </article>
+
+        <!-- Postura -->
+        <article class="card practice-card">
+          <h3>Check de postura (60 s)</h3>
+          <p class="muted">Antes de una reunión o llamada, revisa estos puntos frente al espejo o a la cámara.</p>
+          <ul class="posture-list" id="postureList"></ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- HÁBITOS -->
+    <section id="habitos" class="section">
+      <div class="section-head">
+        <h2>Hábitos diarios</h2>
+        <p>Marca los que completes hoy. La comunicación mejora con constancia, no con intensidad puntual.</p>
+      </div>
+      <ul class="habits" id="habitsList"></ul>
+      <div class="habits-footer">
+        <button id="habitsReset" class="btn btn-ghost">Empezar un nuevo día</button>
+        <span id="habitsScore" class="muted"></span>
+      </div>
+    </section>
+
+    <!-- QUIZ -->
+    <section id="quiz" class="section section-alt">
+      <div class="section-head">
+        <h2>Autoevaluación</h2>
+        <p>10 preguntas para repasar conceptos. Sin prisa: lee, elige y comprueba la explicación.</p>
+      </div>
+      <div id="quizBox" class="quiz-box"></div>
+      <div class="quiz-footer">
+        <button id="quizReset" class="btn btn-ghost">Reiniciar quiz</button>
+        <span id="quizScore" class="muted"></span>
+      </div>
+    </section>
+
+    <!-- DIARIO -->
+    <section id="diario" class="section">
+      <div class="section-head">
+        <h2>Diario de progreso</h2>
+        <p>Apunta cada día: ¿qué practicaste? ¿qué aprendiste de ti? Se guarda en este navegador.</p>
+      </div>
+      <form id="journalForm" class="journal-form">
+        <label>Fecha <input type="date" id="journalDate" required /></label>
+        <label>Situación o ejercicio
+          <input type="text" id="journalSituation" placeholder="Ej. Reunión con cliente / ensayé 3 min" required />
+        </label>
+        <label>¿Qué salió bien?
+          <textarea id="journalGood" rows="2" required></textarea>
+        </label>
+        <label>¿Qué quiero mejorar?
+          <textarea id="journalImprove" rows="2" required></textarea>
+        </label>
+        <button class="btn btn-primary" type="submit">Guardar entrada</button>
+      </form>
+      <ul id="journalList" class="journal-list"></ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>Comunica · Herramienta personal de práctica. Los datos se guardan solo en tu navegador.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
